@@ -2,7 +2,7 @@
 All required Servers created using terraform file 'servers.tf' and below commands are for further configuration of those servers
 
 Server-1: Jenkins-server
-- udo apt update -y
+- sudo apt update -y
 - sudo apt install default-jre -y
 - wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key
 - sudo apt-key add -
