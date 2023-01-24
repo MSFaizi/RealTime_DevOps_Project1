@@ -4,8 +4,7 @@ All required Servers created using terraform file 'servers.tf' and below command
 Server-1: Jenkins-server
 - sudo apt update -y
 - sudo apt install default-jre -y
-- wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key
-- sudo apt-key add -
+- wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 - sudo sh -c "echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list"
 - sudo apt update -y
 - sudo add-apt-repository universe -y
@@ -16,12 +15,12 @@ Server-1: Jenkins-server
 Server-2: SonarQube-server
 - sudo apt update -y
 - sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-- curl -fsSL https://download.docker.com/linux/ubuntu/gpg
-- sudo apt-key add -
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" -y
 - sudo apt update -y
 - apt-cache policy docker-ce -y
 - sudo apt install docker-ce -y
+- docker info
 - sudo chmod 777 /var/run/docker.sock
 - docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
@@ -50,17 +49,15 @@ Server-4: Master-server
 - apt-get update
 - apt-get install docker.io -y
 - service docker restart
-- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg
-- apt-key add -
+- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 - echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >/etc/apt/sources.list.d/kubernetes.list
 - apt-get update
 - apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
 - kubeadm init --pod-network-cidr=192.168.0.0/16 \
  (Note:Copy the token and paste it into the worker node.)
-- exit
 - mkdir -p $HOME/.kube
 - sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-- sudo chown $(id -u):$(id -g) $HOME/.kube/config
+- sudo chown $ (id -u):$(id -g) $HOME/.kube/config
 - kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 - kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.49.0/deploy/static/provider/baremetal/deploy.yaml
 - kubectl get nodes
@@ -70,8 +67,7 @@ Server-5: Node-server
 - apt-get update
 - apt-get install docker.io -y
 - service docker restart
-- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg
-- apt-key add -
+- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 - echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >/etc/apt/sources.list.d/kubernetes.list
 - apt-get update
 - apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
