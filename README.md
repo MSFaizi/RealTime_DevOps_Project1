@@ -72,3 +72,36 @@ Server-5: Node-server
 - apt-get update
 - apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
 
+Configuration: 
+- Manage Jenkins -> Managa Plugins -> Available (Search for sonar - Install SonarQube Scanner, Sonar Quality Gates, Quality Gates, Sonar Gerrit, SonarQube Generic Coverage)
+- Manage Jenkins -> Configure System (Find SonarQube - Tick on 'Environmental variable' and then click on Add SonarQube)
+- Give proper name and paste sonarqube public ip with pot in URL field
+- Apply & Save
+- Manage Jenkins -> Configure System (Find SonarQube) -> Server Authentication token -> click on add and select jenkins
+- In the field of kind select 'Secret text'
+- Go to SonarQube Browser -> Administration -> Security -> User -> Give token name and generate token -> Copy that secret keyand paste in jenkins secret field
+- Click on add (jenkins)
+- Select sonar-token in the 'Server authentication token' field
+- Apply & Save
+- Go to SonarQube browser -> Administration -> Configuration -> Select 'Webhooks' -> Create 
+- Name - jenkins-webhook
+- URL - http:// paste public ip of jenkins/sonarqube-webhook
+- Go to jenkins -> New Item -> Give project name -> Tick on Discard old builds -> days to keep builds-3 -> Max # of builds to keep-3 -> 
+- Under Pipeline -> Definition- Pipeline script from SCM -> SCM-git -> Repository URL- Paste github project URL -> 
+- Save & Apply
+- Pipeline Syntax -> Sample Step- 'Choose withSonarQubeEnv' -> Server authentication-select sonar token -> Generate Pipeline Script -> copy script and paste in VS code Jenkinsfile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
